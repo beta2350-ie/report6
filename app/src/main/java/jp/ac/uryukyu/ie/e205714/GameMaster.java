@@ -1,7 +1,7 @@
 package jp.ac.uryukyu.ie.e205714;
 
 import java.util.Scanner;
-
+import java.util.Random;
 /**
  * This class is GameMaster class(GameMasterクラスです。) This game is proceed by this
  * class. (このゲームはこのクラスで進行します。)
@@ -9,8 +9,7 @@ import java.util.Scanner;
 public class GameMaster {
 
     private boolean loop = true;
-    private Player player = new Player();
-    private Player opponent = new Player();
+    private String shooter = "player1";
 
     /**
      * Constructor.
@@ -22,28 +21,34 @@ public class GameMaster {
     /**
      * This method set players name.
      */
-    public void setNames() {
+    public void setNames(Player player1, Player player2) {
         System.out.println("player1の名前を入れてください");
         Scanner scanner = new Scanner(System.in);
-        player.setName(scanner.nextLine());
+        player1.setName(scanner.nextLine());
         System.out.println("player2の名前を入れてください");
-        opponent.setName(scanner.nextLine());
+        player2.setName(scanner.nextLine());
+    }
+
+    public void setFirstOrLater(){
+        var random = new Random();
+        int index = random.nextInt(2);
     }
 
     /**
      * This method display game board.
+     * 
      * @param grid
      */
     public void gridPrint() {
         System.out.println("-------");
         System.out.print("|");
-        for (int i = 0; i < 3; i++) {
+        for (int i = 1; i < 4; i++) {
             System.out.print(i);
             System.out.print("|");
         }
         System.out.println();
         System.out.print("|");
-        for (int i = 3; i < 6; i++) {
+        for (int i = 4; i < 7; i++) {
             System.out.print(i);
             System.out.print("|");
         }
@@ -52,16 +57,22 @@ public class GameMaster {
     }
 
     /**
-     * This method return loop value.
-     * @return
+     * This method judge that ball enter the goal.
+     * 
+     * @param shoot  shoot position
+     * @param keep   keep position
+     * @param keeper 1 is player1,2 is player2
      */
-    public boolean getLoop() {
-        return this.loop;
+    public void goalJudge(Player shooter, Player keeper) {
+        if (shooter.getShoot() == keeper.getKeep()) {
+            System.out.println(keeper.getName() + "は" + shooter.getName() + "の攻撃を防いだ");
+        }else{
+            System.out.println(shooter.getName() + "はゴールを決めた");
+        }
     }
 
     /**
-     * This method judge game finish.
-     * if this game finish,loop value false.
+     * This method judge game finish. if this game finish,loop value false.
      */
     public void finishGame() {
         System.out.println("ゲームを終了しますか？y(yes)かn(no)を選択してください。");
@@ -88,12 +99,32 @@ public class GameMaster {
     }
 
     /**
+     * This method return loop value.
+     * 
+     * @return
+     */
+    public boolean getLoop() {
+        return this.loop;
+    }
+
+    /**
      * This game is proceed by this method. (このゲームはこのメソッドで進行します。)
      */
     public void gameStart() {
-        setNames();
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Opponent opponent = new Opponent();
+        setNames(player1, player2);
         while (true) {
             gridPrint();
+            if (shooter.equals("player1")) {
+                goalJudge(player1, player2);
+                shooter = "player2";
+
+            } else {
+                goalJudge(player2, player1);
+                shooter = "player1";
+            }
             break;
         }
         finishGame();
