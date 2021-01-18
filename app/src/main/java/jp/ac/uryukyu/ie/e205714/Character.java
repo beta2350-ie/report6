@@ -1,10 +1,8 @@
 package jp.ac.uryukyu.ie.e205714;
 
-import java.util.Scanner;
-
 /**
  * This class is Character class. This class write Character
- * movement.(このクラスは自分の動きを記述します。) String name;//Character name status indicate that
+ * movement.(このクラスはCharacterの動きを記述します。) String name;//Character name status indicate that
  * Character'job is shooter or keeper.
  */
 public abstract class Character {
@@ -52,7 +50,7 @@ public abstract class Character {
     /**
      * This method set Character's job.
      * 
-     * @param _status
+     * @param _status Character's job.
      */
     public void setStatus(boolean _status) {
         this.status = _status;
@@ -69,14 +67,15 @@ public abstract class Character {
 
     /**
      * This method set shoot value.
-     * @param _shoot
+     * @param _shoot new shoot value
      */
     public void setShoot(int _shoot){
         this.shoot=_shoot;
     }
-
+    
     /**
      * This method set keep value.
+     * @param _keep new keep value
      */
     public void setKeep(int _keep){
         this.keep=_keep;
@@ -102,7 +101,6 @@ public abstract class Character {
 
     /**
      * This method add Character's score.
-     * @param _score
      */
     public void setScore(){
         this.score++;

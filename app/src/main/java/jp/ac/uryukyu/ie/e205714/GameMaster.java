@@ -20,6 +20,8 @@ public class GameMaster {
 
     /**
      * This method set players name.
+     * @param player1 Character type
+     * @param player2 Character type
      */
     public void setNames(Character player1, Character player2) {
         System.out.println("player1の名前を入れてください");
@@ -29,6 +31,12 @@ public class GameMaster {
         player2.setName(scanner.nextLine());
     }
 
+    /**
+     * This method decide first attack.
+     * 
+     * @param player1 Character type
+     * @param player2 Character type
+     */
     public void setFirstOrLater(Character player1, Character player2) {
         var random = new Random();
         boolean status = random.nextBoolean();
@@ -39,8 +47,6 @@ public class GameMaster {
 
     /**
      * This method display game board.
-     * 
-     * @param grid
      */
     public void gridPrint() {
         System.out.println("-------");
@@ -62,8 +68,7 @@ public class GameMaster {
     /**
      * This method judge that ball enter the goal.
      * 
-     * @param shoot  shoot position
-     * @param keep   keep position
+     * @param shooter  shoot position
      * @param keeper 1 is player1,2 is player2
      */
     public void goalJudge(Character shooter, Character keeper) {
@@ -92,6 +97,7 @@ public class GameMaster {
                 } else if (finish.equals("y")) {
                     System.out.println("ゲームを終了します。お疲れ様でした。");
                     loop = false;
+                    scanner.close();
                     break;
                 } else {
                     System.out.println("y(yes)かn(no)を選択してください。");
@@ -104,6 +110,7 @@ public class GameMaster {
 
     /**
      * This method decide gamemode.
+     * 
      * @return if player play pvp mode,return 0. if player play pve mode,return 1.
      */
     public int gameMode() {
@@ -111,16 +118,21 @@ public class GameMaster {
         System.out.println("このゲームは対人戦と対コンピュータ戦ができます。");
         System.out.println("対人戦の場合は0、対コンピュータ戦の場合は1を入力してください。");
         while (true) {
-            Scanner scanner = new Scanner(System.in);
-            mode = scanner.nextInt();
-            if (mode == 0 || mode == 1) {
-                break;
-            } else {
-                System.out.println("対人戦の場合は0、対コンピュータ戦の場合は1を入力してください。");
+            try {
+                Scanner scanner = new Scanner(System.in);
+                mode = scanner.nextInt();
+                if (mode == 0 || mode == 1) {
+                    break;
+                } else {
+                    System.out.println("対人戦の場合は0、対コンピュータ戦の場合は1を入力してください。");
+                }
+            } catch (Exception e) {
+                // TODO: handle exception
             }
         }
         return mode;
     }
+
     /**
      * This method run pvpMode.
      */
@@ -167,7 +179,7 @@ public class GameMaster {
     /**
      * This method run pveMode.
      */
-    public void pveMode(){
+    public void pveMode() {
         Player player1 = new Player();
         Opponent player2 = new Opponent();
         setNames(player1, player2);
@@ -210,7 +222,7 @@ public class GameMaster {
     /**
      * This method return loop value.
      * 
-     * @return
+     * @return loop value
      */
     public boolean getLoop() {
         return this.loop;
@@ -220,9 +232,9 @@ public class GameMaster {
      * This game is proceed by this method. (このゲームはこのメソッドで進行します。)
      */
     public void gameStart() {
-        if(gameMode()==0){
+        if (gameMode() == 0) {
             pvpMode();
-        }else{
+        } else {
             pveMode();
         }
         finishGame();

@@ -17,6 +17,7 @@ public class Player extends Character {
 
     /**
      * This method get player's shoot position.
+     * getStatud indicate that true is shooter,false is keeper.
      */
     @Override
     public void shootPosition() {
