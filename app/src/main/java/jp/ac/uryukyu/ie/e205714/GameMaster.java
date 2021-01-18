@@ -2,6 +2,7 @@ package jp.ac.uryukyu.ie.e205714;
 
 import java.util.Scanner;
 import java.util.Random;
+
 /**
  * This class is GameMaster class(GameMasterクラスです。) This game is proceed by this
  * class. (このゲームはこのクラスで進行します。)
@@ -28,7 +29,7 @@ public class GameMaster {
         player2.setName(scanner.nextLine());
     }
 
-    public void setFirstOrLater(Player player1, Player player2){
+    public void setFirstOrLater(Player player1, Player player2) {
         var random = new Random();
         boolean status = random.nextBoolean();
         player1.setSatus(status);
@@ -68,8 +69,9 @@ public class GameMaster {
     public void goalJudge(Player shooter, Player keeper) {
         if (shooter.getShoot() == keeper.getKeep()) {
             System.out.println(keeper.getName() + "は" + shooter.getName() + "の攻撃を防いだ");
-        }else{
+        } else {
             System.out.println(shooter.getName() + "はゴールを決めた");
+            shooter.setScore();
         }
     }
 
@@ -118,8 +120,8 @@ public class GameMaster {
         Opponent opponent = new Opponent();
         setNames(player1, player2);
         setFirstOrLater(player1, player2);
-        int numberOfTime=1;
-        while (!(numberOfTime==10)) {
+        int numberOfTime = 0;
+        while (!(numberOfTime == 10)) {
             gridPrint();
             if (player1.getStatus()) {
                 player1.shootPosition();
@@ -131,10 +133,26 @@ public class GameMaster {
                 player1.keepPosition();
                 goalJudge(player2, player1);
             }
-            System.out.println("攻守交代です");
             numberOfTime++;
+            if (!(numberOfTime == 10)) {
+                System.out.println("現在の点数は");
+                System.out.println(player1.getName()+"::"+player1.getScore());
+                System.out.println(player2.getName()+"::"+player2.getScore());
+                System.out.println("攻守交代です。");
+            }else{
+                System.out.println("試合終了。");
+            }
+        }
+        System.out.println("最終成績は");
+        System.out.println(player1.getName()+"::"+player1.getScore());
+        System.out.println(player2.getName()+"::"+player2.getScore());
+        if(player1.getScore()>player2.getScore()){
+            System.out.println(player1.getName()+"の勝ち！！");
+        }else if(player1.getScore()<player2.getScore()){
+            System.out.println(player2.getName()+"の勝ち！！");
+        }else{
+            System.out.println("引き分けです。");
         }
         finishGame();
     }
-
 }

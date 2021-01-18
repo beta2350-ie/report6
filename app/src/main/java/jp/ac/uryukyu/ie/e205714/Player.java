@@ -12,6 +12,7 @@ public class Player {
     private int shoot = 0;
     private int keep = 0;
     private boolean status = false;
+    private int score=0;
 
     /**
      * Constructor.
@@ -116,5 +117,21 @@ public class Player {
      */
     public int getKeep() {
         return this.keep;
+    }
+
+    /**
+     * This method add player's score.
+     * @param _score
+     */
+    public void setScore(){
+        this.score++;
+    }
+
+    /**
+     * This method return player's score.
+     * @return player's score.
+     */
+    public int getScore(){
+        return this.score;
     }
 }
