@@ -32,8 +32,8 @@ public class GameMaster {
     public void setFirstOrLater(Player player1, Player player2) {
         var random = new Random();
         boolean status = random.nextBoolean();
-        player1.setSatus(status);
-        player2.setSatus(!status);
+        player1.setStatus(status);
+        player2.setStatus(!status);
 
     }
 
