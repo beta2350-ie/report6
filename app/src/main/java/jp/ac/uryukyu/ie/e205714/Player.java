@@ -4,20 +4,22 @@ import java.util.Scanner;
 
 /**
  * This class is Player class. This class write player
- * movement.(このクラスは自分の動きを記述します。) String name;//Player name
- * status indicate that player'job is shooter or keeper. 
+ * movement.(このクラスは自分の動きを記述します。) String name;//Player name status indicate that
+ * player'job is shooter or keeper.
  */
 public class Player {
     private String name;
-    private int shoot=0;
-    private int keep=0;
-    private boolean status=false;
+    private int shoot = 0;
+    private int keep = 0;
+    private boolean status = false;
+
     /**
      * Constructor.
      */
     public Player() {
 
     }
+
     /**
      * This method get player's shoot position.
      */
@@ -37,6 +39,7 @@ public class Player {
                 System.out.println("1~6の数字を入力してください。");
             }
         }
+        status = !status;
     }
 
     /**
@@ -58,10 +61,11 @@ public class Player {
                 System.out.println("1~6の数字を入力してください。");
             }
         }
+        status = !status;
     }
 
     /**
-     *  This method get player name.
+     * This method get player name.
      * 
      * @return name
      */
@@ -80,33 +84,37 @@ public class Player {
 
     /**
      * This method set player's job.
+     * 
      * @param _status
      */
-    public void setSatus(boolean _status){
-        this.status=_status;
+    public void setSatus(boolean _status) {
+        this.status = _status;
     }
 
     /**
      * This method return player's job.
+     * 
      * @return status
      */
-    public boolean getStatus(){
+    public boolean getStatus() {
         return this.status;
     }
 
     /**
      * This method return shoot value.
+     * 
      * @return shoot value
      */
-    public int getShoot(){
+    public int getShoot() {
         return this.shoot;
     }
 
     /**
      * This method return keep value.
+     * 
      * @return keep value
      */
-    public int getKeep(){
+    public int getKeep() {
         return this.keep;
     }
 }

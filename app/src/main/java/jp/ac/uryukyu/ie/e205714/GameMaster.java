@@ -9,7 +9,6 @@ import java.util.Random;
 public class GameMaster {
 
     private boolean loop = true;
-    private String shooter = "player1";
 
     /**
      * Constructor.
@@ -29,9 +28,12 @@ public class GameMaster {
         player2.setName(scanner.nextLine());
     }
 
-    public void setFirstOrLater(){
+    public void setFirstOrLater(Player player1, Player player2){
         var random = new Random();
-        int index = random.nextInt(2);
+        boolean status = random.nextBoolean();
+        player1.setSatus(status);
+        player2.setSatus(!status);
+
     }
 
     /**
@@ -115,17 +117,22 @@ public class GameMaster {
         Player player2 = new Player();
         Opponent opponent = new Opponent();
         setNames(player1, player2);
-        while (true) {
+        setFirstOrLater(player1, player2);
+        int numberOfTime=1;
+        while (!(numberOfTime==10)) {
             gridPrint();
-            if (shooter.equals("player1")) {
+            if (player1.getStatus()) {
+                player1.shootPosition();
+                player2.keepPosition();
                 goalJudge(player1, player2);
-                shooter = "player2";
 
             } else {
+                player2.shootPosition();
+                player1.keepPosition();
                 goalJudge(player2, player1);
-                shooter = "player1";
             }
-            break;
+            System.out.println("攻守交代です");
+            numberOfTime++;
         }
         finishGame();
     }
