@@ -1,6 +1,7 @@
 package jp.ac.uryukyu.ie.e205714;
 
 import java.util.Scanner;
+import java.util.Random;
 
 /**
  * This class is Opponent class. This class write opponent
@@ -17,47 +18,25 @@ public class Opponent extends Character{
 
     /**
      * This method get opponent's shoot position.
+     * Opponent shoot position is random.
      */
     @Override
     public void shootPosition() {
         System.out.println(this.getName() + "がシュートします");
-        System.out.println("シュートする場所を選択(1~6の数字を入力)");
-        while (true) {
-            try {
-                Scanner scanner = new Scanner(System.in);
-                this.setShoot(scanner.nextInt()); 
-                if (this.getShoot() >= 0 && this.getShoot() <= 6) {
-                    break;
-                } else {
-                    System.out.println("1~6の数字を入力してください。");
-                }
-            } catch (Exception e) {
-                System.out.println("1~6の数字を入力してください。");
-            }
-        }
-        this.setStatus(!getStatus());
+        var random = new Random();
+        this.setShoot(random.nextInt(5)+1); 
+        this.setStatus(!this.getStatus());
     }
 
     /**
      * This method get opponent's gard position.
+     * Opponent keep position is random.
      */
     @Override
     public void keepPosition() {
         System.out.println(this.getName() + "がキーパーをします");
-        System.out.println("守る場所を選択(1~6の数字を入力)");
-        while (true) {
-            try {
-                Scanner scanner = new Scanner(System.in);
-                this.setKeep(scanner.nextInt());
-                if (this.getKeep() >= 0 && this.getKeep() <= 6) {
-                    break;
-                } else {
-                    System.out.println("1~6の数字を入力してください。");
-                }
-            } catch (Exception e) {
-                System.out.println("1~6の数字を入力してください。");
-            }
-        }
+        var random = new Random();
+        this.setKeep(random.nextInt(5)+1); 
         this.setStatus(!this.getStatus());
     }
 }

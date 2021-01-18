@@ -26,7 +26,7 @@ public class Player extends Character {
             try {
                 Scanner scanner = new Scanner(System.in);
                 this.setShoot(scanner.nextInt());
-                if (this.getShoot() >= 0 && this.getShoot() <= 6) {
+                if (this.getShoot() > 0 && this.getShoot() <= 6) {
                     break;
                 } else {
                     System.out.println("1~6の数字を入力してください。");
@@ -49,7 +49,7 @@ public class Player extends Character {
             try {
                 Scanner scanner = new Scanner(System.in);
                 this.setKeep(scanner.nextInt());
-                if (this.getKeep() >= 0 && this.getKeep() <= 6) {
+                if (this.getKeep() > 0 && this.getKeep() <= 6) {
                     break;
                 } else {
                     System.out.println("1~6の数字を入力してください。");
